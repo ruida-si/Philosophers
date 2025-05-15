@@ -6,30 +6,70 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:42:24 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/06 19:36:03 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:44:05 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-typedef struct s_data
-{
-	int	nbr_philo;
-	int	time_die;
-	int	time_eat;
-	int	time_sleep;
-	int	nbr_meals;
-}	t_data;
+# define LOCK 1
+# define UNLOCK 0
 
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
 # include <pthread.h>
+# include <sys/time.h>
 
-int		ft_atoi(char *s);
+// colors
+# define RED "\033[41m"
+# define RESET "\033[0m"
+
+typedef struct s_data t_data;
+
+typedef struct s_philo
+{
+	int			n;
+	int			meals;
+	long		last_meal;
+	int			dead;
+	pthread_mutex_t	fork;
+	pthread_t	thread;
+	t_data		*data;
+}	t_philo;
+
+typedef struct s_data
+{
+	char			*av[5];
+	long			start;
+	int				nbr_philo;
+	long			time_die;
+	long			time_eat;
+	long			time_sleep;
+	int				nbr_meals;
+	int				finish;
+	pthread_mutex_t	print;
+	pthread_t		monitor;
+	t_philo			*philo;
+}	t_data;
+
+long	ft_atol(char *s, t_data *data, int j);
 int		print_error(char *s);
 void	free_mem(pthread_t *td, pthread_mutex_t *mutex);
+long	ft_get_time(void);
+void	print_usage(void);
+int		innit_data(char **av, t_data *data);
+
+// monitor routine
+int	check_all_dead(t_data *data);
+int	check_nbr_meals(t_data *data);
+
+// eating
+void	eating(t_philo *philo, t_data *data);
+
+// sleeping
+void	sleeping(t_philo *philo, t_data *data);
 
 #endif

@@ -6,25 +6,40 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:13:44 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/06 19:35:37 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/13 13:55:37 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int			ft_atoi(char *s);
-int			print_error(char *s);
+void		print_usage(void);
+long		ft_atol(char *s, t_data *data, int j);
 static int	white_spaces(char c);
-static int	ft_strlen(char *s);
 
-
-void	free_mem(pthread_t *td, pthread_mutex_t *mutex)
+long	ft_get_time(void)
 {
-	free(td);
-	pthread_mutex_destroy(mutex);
+	struct timeval	tv;
+	long			n;
+
+	if (gettimeofday(&tv, NULL) != 0)
+		return (printf("Error gettimeofday()\n"), -1);
+	n = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	return (n);
 }
 
-int	ft_atoi(char *s)
+void	print_usage(void)
+{
+	printf("\nYou should pass FOUR or FIVE arguments to the program\n"
+		"Example:\n"
+		"[0] Program name\n"
+		"[1] Number of Philosophers\n"
+		"[2] Time to die\n"
+		"[3] Time to eat\n"
+		"[4] Time to sleep\n"
+		"[5] [optional] Number_of_times_each_philosopher_must_eat\n\n");
+}
+
+long	ft_atol(char *s, t_data *data, int j)
 {
 	int		i;
 	long	n;
@@ -32,48 +47,30 @@ int	ft_atoi(char *s)
 	n = 0;
 	i = 0;
 	if (!s || !s[i])
-		return (print_error("Void arguments"));
+		return (data->av[j] = "Void argument", -1);
 	while (s[i] == ' ' || white_spaces(s[i]))
 		i++;
 	if (s[i] == '-')
-		return (print_error("Only positive numbers"));
+		return (data->av[j] = "Only positive numbers", -1);
 	if (s[i] == '+')
 		i++;
 	while (s[i] >= '0' && s[i] <= '9')
 	{
 		n = n * 10 + (s[i] - '0');
 		if (n > INT_MAX)
-			return (print_error("Number is higher than INT_MAX"));
+			return (data->av[j] = "Number is higher than INT_MAX", -1);
 		i++;
 	}
-	if (i < ft_strlen(s))
-		return (print_error("Invalid arguments"));
+	if (s[i])
+		return (data->av[j] = "Invalid argument", -1);
 	if (n == 0)
-		return (print_error("Only numbers > 0"));
+		return (data->av[j] = "Only numbers > 0", -1);
 	return (n);
 }
 
-int	print_error(char *s)
-{
-	printf("%s\n", s);
-	return (-1);
-}
-
-static int  white_spaces(char c)
+static int	white_spaces(char c)
 {
 	if (c >= 9 && c <= 13)
 		return (1);
 	return (0);
-}
-
-static int	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
 }
