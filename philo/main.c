@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:32:11 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/17 21:03:09 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:16:17 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ static void	ft_destroy_forks(t_data *data)
 	while (i < data->nbr_philo)
 	{
 		pthread_mutex_destroy(&data->philo[i].fork);
-		i++;		
-	}	
+		i++;
+	}
 }
 
 static void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
 	t_data	*data;
-	
+
 	philo = (t_philo *)arg;
-	data = philo->data;	
+	data = philo->data;
 	while (data->finish == 0)
 	{
 		if (data->finish == 0)
@@ -72,6 +72,7 @@ static void	*monitor_routine(void *arg)
 
 	i = 0;
 	data = (t_data *)arg;
+	usleep(1000);
 	while (1)
 	{
 		if (!check_nbr_meals(data))
@@ -91,12 +92,12 @@ static int	create_threads(t_data *data)
 	if (pthread_create(&data->monitor, NULL, &monitor_routine, data) != 0)
 		return (0);
 	while (i < data->nbr_philo)
-	{	
+	{
 		if (pthread_create(&data->philo[i].thread, NULL, &philo_routine,
-			&data->philo[i]) != 0)
+				&data->philo[i]) != 0)
 			return (0);
 		i++;
-	}	
+	}
 	i = 0;
 	while (i < data->nbr_philo)
 	{

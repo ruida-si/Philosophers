@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:42:24 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/16 19:43:21 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:18:06 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@
 # define THINK "is thinking"
 # define DEAD "died"
 
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 
 typedef struct s_philo
 {
-	int			n;
-	int			meals;
-	long		last_meal;
+	int				n;
+	int				meals;
+	long			last_meal;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*fork1;
 	pthread_mutex_t	*fork2;
-	pthread_t	thread;
-	t_data		*data;
+	pthread_t		thread;
+	t_data			*data;
 }	t_philo;
 
 typedef struct s_data
@@ -68,8 +68,8 @@ void	print_usage(void);
 int		innit_data(char **av, t_data *data);
 
 // monitor routine
-int	check_for_dead(t_data *data);
-int	check_nbr_meals(t_data *data);
+int		check_for_dead(t_data *data);
+int		check_nbr_meals(t_data *data);
 
 // eating
 void	eating(t_philo *philo, t_data *data);

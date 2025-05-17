@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:36:14 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/16 12:30:14 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:18:36 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	init_philo(t_data *data)
 		data->philo[i].data = data;
 		grab_forks(&data->philo[i], data);
 		pthread_mutex_init(&data->philo[i].fork, NULL);
-		i++;			
+		i++;
 	}
 	return (1);
 }
@@ -68,7 +68,7 @@ static int	init_philo(t_data *data)
 static void	grab_forks(t_philo *philo, t_data *data)
 {
 	int	n;
-	
+
 	n = philo->n;
 	if (n % 2 == 0)
 	{
@@ -98,7 +98,7 @@ static int	check_errors(t_data *data)
 	if (data->time_sleep == -1)
 		fail |= (1 << 4);
 	if (data->nbr_meals == -1)
-		fail |= (1 << 5);	
+		fail |= (1 << 5);
 	if (fail)
 	{
 		print_msg(fail, data);

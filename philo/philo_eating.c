@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:06:10 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/17 20:28:11 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:21:50 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_print(t_data *data, char *str1, char *str2, int n);
 static void	check_first_iter(t_philo *philo, t_data *data);
-static int	check_order(t_philo *philo, t_data * data);
+static int	check_order(t_philo *philo, t_data *data);
 
 void	eating(t_philo *philo, t_data *data)
 {
@@ -30,9 +30,10 @@ void	eating(t_philo *philo, t_data *data)
 			if (!pthread_mutex_lock(philo->fork2))
 			{
 				philo->last_meal = ft_get_time();
-				ft_print(data, FORK, EAT, philo->n);			
-				while (ft_get_time() - philo->last_meal < data->time_eat && !data->finish)
-					usleep(500);
+				ft_print(data, FORK, EAT, philo->n);
+				while (ft_get_time() - philo->last_meal < data->time_eat
+					&& data->finish == 0)
+					usleep(1000);
 				philo->meals++;
 				pthread_mutex_unlock(philo->fork1);
 				pthread_mutex_unlock(philo->fork2);
@@ -48,7 +49,7 @@ void	eating(t_philo *philo, t_data *data)
 static int	check_order(t_philo *philo, t_data *data)
 {
 	long	cur_time;
-	
+
 	cur_time = ft_get_time();
 	if (philo->meals == 0)
 		return (1);
@@ -71,7 +72,7 @@ static int	check_order(t_philo *philo, t_data *data)
 static void	check_first_iter(t_philo *philo, t_data *data)
 {
 	long	delay;
-	
+
 	delay = 0.9 * data->time_eat * 1000;
 	if (ft_get_time() - data->start < data->time_eat)
 	{
@@ -97,8 +98,8 @@ static void	check_first_iter(t_philo *philo, t_data *data)
 				ft_print(data, THINK, NULL, philo->n);
 				usleep(delay);
 			}
-		}		
-	}	
+		}
+	}
 }
 
 static void	ft_print(t_data *data, char *str1, char *str2, int n)
@@ -110,5 +111,5 @@ static void	ft_print(t_data *data, char *str1, char *str2, int n)
 		if (str2)
 			printf("%ld %i %s\n", ft_get_time() - data->start, n + 1, str2);
 	}
-	pthread_mutex_unlock(&data->print);	
+	pthread_mutex_unlock(&data->print);
 }
