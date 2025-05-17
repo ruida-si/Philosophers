@@ -6,13 +6,14 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:36:14 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/13 13:59:19 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/16 12:30:14 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static int	init_philo(t_data *data);
+static void	grab_forks(t_philo *philo, t_data *data);
 static int	check_errors(t_data *data);
 static void	print_msg(int fail, t_data *data);
 
@@ -56,12 +57,29 @@ static int	init_philo(t_data *data)
 		data->philo[i].n = i;
 		data->philo[i].meals = 0;
 		data->philo[i].last_meal = ft_get_time();
-		data->philo[i].dead = 0;
 		data->philo[i].data = data;
+		grab_forks(&data->philo[i], data);
 		pthread_mutex_init(&data->philo[i].fork, NULL);
 		i++;			
 	}
 	return (1);
+}
+
+static void	grab_forks(t_philo *philo, t_data *data)
+{
+	int	n;
+	
+	n = philo->n;
+	if (n % 2 == 0)
+	{
+		philo->fork1 = &philo->fork;
+		philo->fork2 = &data->philo[(n + 1) % data->nbr_philo].fork;
+	}
+	else
+	{
+		philo->fork2 = &philo->fork;
+		philo->fork1 = &data->philo[(n + 1) % data->nbr_philo].fork;
+	}
 }
 
 static int	check_errors(t_data *data)

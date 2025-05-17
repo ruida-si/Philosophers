@@ -6,7 +6,7 @@
 #    By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 13:50:34 by ruida-si          #+#    #+#              #
-#    Updated: 2025/05/13 13:57:21 by ruida-si         ###   ########.fr        #
+#    Updated: 2025/05/16 12:31:32 by ruida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ CC = cc
 
 CFLAGS = -Werror -Wextra -Wall -pthread -g
 
-SRCS = main.c utils.c philo_routine.c innit.c monitor_routine.c
-
+SRCS = main.c utils.c innit.c monitor_routine.c \
+	philo_routine.c philo_eating.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
