@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:58:16 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/20 15:13:46 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:30:15 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static void	check_first_iter(t_philo *philo, t_data *data, long delay)
 {
 	if (data->nbr_philo % 2 != 0)
 	{
-		if (philo->n % 2 != 0 || data->nbr_philo == 1)
+		if (philo->id % 2 != 0)
 			return ;
 		else
 		{
-			ft_print(data, THINK, NULL, philo->n);
-			if (philo->n == data->nbr_philo - 1)
+			ft_print(data, THINK, NULL, philo->id);
+			if (philo->id == data->nbr_philo - 1)
 				usleep(delay);
 			else
 				usleep(2 * delay);
@@ -56,11 +56,11 @@ static void	check_first_iter(t_philo *philo, t_data *data, long delay)
 	}
 	else
 	{
-		if (philo->n % 2 != 0)
+		if (philo->id % 2 != 0)
 			return ;
 		else
 		{
-			ft_print(data, THINK, NULL, philo->n);
+			ft_print(data, THINK, NULL, philo->id);
 			usleep(delay);
 		}
 	}
@@ -71,10 +71,10 @@ int	check_finish(t_data *data)
 	int	i;
 
 	i = 0;
-	pthread_mutex_lock(&data->write);
+	pthread_mutex_lock(&data->write_finish);
 	if (data->finish == 0)
 		i = 1;
-	pthread_mutex_unlock(&data->write);
+	pthread_mutex_unlock(&data->write_finish);
 	return (i);
 }
 
@@ -83,7 +83,7 @@ static void	sleeping(t_philo *philo, t_data *data)
 	long	start;
 	int		n;
 
-	n = philo->n;
+	n = philo->id;
 	start = ft_get_time();
 	pthread_mutex_lock(&data->print);
 	if (check_finish(data))
@@ -97,7 +97,7 @@ static void	thinking(t_philo *philo, t_data *data)
 {
 	int	n;
 
-	n = philo->n;
+	n = philo->id;
 	pthread_mutex_lock(&data->print);
 	if (check_finish(data))
 		printf("%ld %i %s\n", ft_get_time() - data->start, n + 1, THINK);

@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:06:10 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/20 15:57:35 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:30:15 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	eating(t_philo *philo, t_data *data)
 	{
 		if (check_order(philo, data) && !pthread_mutex_lock(philo->fork1))
 		{
-			ft_print(data, FORK, NULL, philo->n);
+			ft_print(data, FORK, NULL, philo->id);
 			if (!pthread_mutex_lock(philo->fork2))
 			{
 				update_last_meal(philo);
-				ft_print(data, FORK, EAT, philo->n);
+				ft_print(data, FORK, EAT, philo->id);
 				while (ft_get_time() - philo->last_meal < data->time_eat
 					&& check_finish(data))
 					usleep(500);

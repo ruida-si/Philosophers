@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:42:24 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/20 15:57:43 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:29:36 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_data	t_data;
 
 typedef struct s_philo
 {
-	int				n;
+	int				id;
 	int				meals;
 	long			last_meal;
 	pthread_mutex_t	fork;
@@ -58,7 +58,7 @@ typedef struct s_data
 	int				nbr_meals;
 	int				finish;
 	pthread_mutex_t	print;
-	pthread_mutex_t	write;	
+	pthread_mutex_t	write_finish;	
 	pthread_t		monitor;
 	t_philo			*philo;
 }	t_data;

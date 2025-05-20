@@ -6,7 +6,7 @@
 #    By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 13:50:34 by ruida-si          #+#    #+#              #
-#    Updated: 2025/05/20 15:23:10 by ruida-si         ###   ########.fr        #
+#    Updated: 2025/05/20 17:27:59 by ruida-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 
 CC = cc
 
-CFLAGS = -Werror -Wextra -Wall -pthread -g
+CFLAGS = -Werror -Wextra -Wall -pthread -g #-fsanitize=thread
 
 SRCS = main.c utils.c innit.c monitor_routine.c \
 	philo_routine.c philo_eating.c

@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:32:11 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/20 16:08:55 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:33:44 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,5 @@ static void	ft_destroy_forks(t_data *data)
 		i++;
 	}
 	pthread_mutex_destroy(&data->print);
-	pthread_mutex_destroy(&data->write);	
+	pthread_mutex_destroy(&data->write_finish);
 }
