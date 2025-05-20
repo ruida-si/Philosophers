@@ -6,15 +6,28 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:13:44 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/13 13:55:37 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:00:27 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+long		ft_get_time(void);
 void		print_usage(void);
 long		ft_atol(char *s, t_data *data, int j);
 static int	white_spaces(char c);
+
+void	ft_print(t_data *data, char *str1, char *str2, int n)
+{
+	pthread_mutex_lock(&data->print);
+	if (check_finish(data))
+	{
+		printf("%ld %i %s\n", ft_get_time() - data->start, n + 1, str1);
+		if (str2)
+			printf("%ld %i %s\n", ft_get_time() - data->start, n + 1, str2);
+	}
+	pthread_mutex_unlock(&data->print);
+}
 
 long	ft_get_time(void)
 {

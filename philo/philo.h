@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:42:24 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/17 21:18:06 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:57:43 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct s_philo
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*fork1;
 	pthread_mutex_t	*fork2;
+	pthread_mutex_t	write_last_meal;
+	pthread_mutex_t	write_meals;
 	pthread_t		thread;
 	t_data			*data;
 }	t_philo;
@@ -55,26 +57,31 @@ typedef struct s_data
 	long			time_sleep;
 	int				nbr_meals;
 	int				finish;
-	long			delay;
 	pthread_mutex_t	print;
+	pthread_mutex_t	write;	
 	pthread_t		monitor;
 	t_philo			*philo;
 }	t_data;
 
+// UTILS INNIT
 long	ft_atol(char *s, t_data *data, int j);
 int		print_error(char *s);
 long	ft_get_time(void);
 void	print_usage(void);
 int		innit_data(char **av, t_data *data);
 
-// monitor routine
-int		check_for_dead(t_data *data);
-int		check_nbr_meals(t_data *data);
+// MONITOR ROUTINE
+void	*monitor_routine(void *arg);
 
-// eating
+// PHILO ROUTINE
+void	*philo_routine(void *arg);
+
+// ACTIONS
 void	eating(t_philo *philo, t_data *data);
 
-// sleeping
-void	sleeping(t_philo *philo, t_data *data);
+// UTILS
+void	ft_print(t_data *data, char *str1, char *str2, int n);
+int		check_finish(t_data *data);
+int		read_meals(t_philo *philo);
 
 #endif
