@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:36:14 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/20 13:48:25 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:08:06 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ static int	init_philo(t_data *data)
 		data->philo[i].data = data;
 		grab_forks(&data->philo[i], data);
 		pthread_mutex_init(&data->philo[i].fork, NULL);
+		pthread_mutex_init(&data->philo[i].write_last_meal, NULL);
+		pthread_mutex_init(&data->philo[i].write_meals, NULL);
 		i++;
 	}
 	pthread_mutex_init(&data->print, NULL);
-	pthread_mutex_init(&data->write, NULL);
-	pthread_mutex_init(&data->write_last_meal, NULL);
-	pthread_mutex_init(&data->write_meals, NULL);
+	pthread_mutex_init(&data->write, NULL);	
 	return (1);
 }
 

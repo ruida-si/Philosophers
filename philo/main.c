@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:32:11 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/20 13:48:05 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:08:55 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ static void	ft_destroy_forks(t_data *data)
 	while (i < data->nbr_philo)
 	{
 		pthread_mutex_destroy(&data->philo[i].fork);
+		pthread_mutex_destroy(&data->philo[i].write_last_meal);
+		pthread_mutex_destroy(&data->philo[i].write_meals);
 		i++;
 	}
 	pthread_mutex_destroy(&data->print);
-	pthread_mutex_destroy(&data->write);
-	pthread_mutex_destroy(&data->write_last_meal);
-	pthread_mutex_destroy(&data->write_meals);
+	pthread_mutex_destroy(&data->write);	
 }
