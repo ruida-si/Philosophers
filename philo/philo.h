@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:42:24 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/20 16:29:36 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:43:09 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int		print_error(char *s);
 long	ft_get_time(void);
 void	print_usage(void);
 int		innit_data(char **av, t_data *data);
+int		one_routine(t_data *data);
 
 // MONITOR ROUTINE
 void	*monitor_routine(void *arg);
