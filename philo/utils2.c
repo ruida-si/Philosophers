@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:39:44 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/21 15:56:53 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:01:06 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_fork_status(pthread_mutex_t *fork, int *fork_status)
 	{
 		i = 1;
 		*fork_status = TAKEN;
-	}	
+	}
 	pthread_mutex_unlock(fork);
 	return (i);
 }
@@ -33,6 +33,6 @@ int	check_fork_status(pthread_mutex_t *fork, int *fork_status)
 void	release_forks(pthread_mutex_t *fork, int *fork_status)
 {
 	pthread_mutex_lock(fork);
-	*fork_status = FREE;		
+	*fork_status = FREE;
 	pthread_mutex_unlock(fork);
 }
