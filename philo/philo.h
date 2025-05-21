@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:42:24 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/20 17:43:09 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:57:53 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,15 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-// colors
+// Colors
 # define RED "\033[41m"
 # define RESET "\033[0m"
 
-//strings
+// Fork status
+# define FREE 0
+# define TAKEN 1
+
+// Actions
 # define FORK "has taken a fork"
 # define EAT "is eating"
 # define SLEEP "is sleeping"
@@ -38,6 +42,9 @@ typedef struct s_philo
 	int				id;
 	int				meals;
 	long			last_meal;
+	int				fork_sts;
+	int				*fork1_status;
+	int				*fork2_status;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*fork1;
 	pthread_mutex_t	*fork2;
@@ -69,7 +76,6 @@ int		print_error(char *s);
 long	ft_get_time(void);
 void	print_usage(void);
 int		innit_data(char **av, t_data *data);
-int		one_routine(t_data *data);
 
 // MONITOR ROUTINE
 void	*monitor_routine(void *arg);
@@ -84,5 +90,7 @@ void	eating(t_philo *philo, t_data *data);
 void	ft_print(t_data *data, char *str1, char *str2, int n);
 int		check_finish(t_data *data);
 int		read_meals(t_philo *philo);
+int		check_fork_status(pthread_mutex_t *fork, int *fork_status);
+void	release_forks(pthread_mutex_t *fork, int *fork_status);
 
 #endif

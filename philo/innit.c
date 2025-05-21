@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:36:14 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/20 17:39:33 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:19:24 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	innit_data(char **av, t_data *data)
 		data->nbr_meals = -2;
 	if (!check_errors(data))
 		return (0);
-	if (data->nbr_philo == 1)
-		return (one_routine(data));
 	if (!init_philo(data))
 		return (0);
 	return (1);
@@ -76,15 +74,20 @@ static void	grab_forks(t_philo *philo, t_data *data)
 	int	n;
 
 	n = philo->id;
+	philo->fork_sts = 0;
 	if (n % 2 == 0)
 	{
 		philo->fork1 = &philo->fork;
+		philo->fork1_status = &philo->fork_sts;
 		philo->fork2 = &data->philo[(n + 1) % data->nbr_philo].fork;
+		philo->fork2_status = &data->philo[(n + 1) % data->nbr_philo].fork_sts;
 	}
 	else
 	{
 		philo->fork2 = &philo->fork;
+		philo->fork2_status = &philo->fork_sts;
 		philo->fork1 = &data->philo[(n + 1) % data->nbr_philo].fork;
+		philo->fork1_status = &data->philo[(n + 1) % data->nbr_philo].fork_sts;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:58:16 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/20 16:30:15 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:15:49 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	check_first_iter(t_philo *philo, t_data *data, long delay)
 {
 	if (data->nbr_philo % 2 != 0)
 	{
-		if (philo->id % 2 != 0)
+		if (philo->id % 2 != 0 || data->nbr_philo == 1)
 			return ;
 		else
 		{
@@ -87,7 +87,7 @@ static void	sleeping(t_philo *philo, t_data *data)
 	start = ft_get_time();
 	pthread_mutex_lock(&data->print);
 	if (check_finish(data))
-		printf("%ld %i %s\n", ft_get_time() - data->start, n + 1, SLEEP);
+		printf("%ld %i %s\n", start - data->start, n + 1, SLEEP);
 	pthread_mutex_unlock(&data->print);
 	while (ft_get_time() - start < data->time_sleep && check_finish(data))
 		usleep(500);

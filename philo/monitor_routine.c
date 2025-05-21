@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:01:40 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/20 16:26:23 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:17:54 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	check_for_dead(t_data *data)
 		{
 			update_finish(data);
 			pthread_mutex_lock(&data->print);
-			printf("%ld %i %s\n", ft_get_time() - data->start, i + 1, DEAD);
+			printf("%ld %i %s\n", curr_time - data->start, i + 1, DEAD);
 			pthread_mutex_unlock(&data->print);
 			return (0);
 		}

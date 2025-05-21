@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:06:10 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/20 16:30:15 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:32:55 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ void	eating(t_philo *philo, t_data *data)
 {
 	while (check_finish(data))
 	{
-		if (check_order(philo, data) && !pthread_mutex_lock(philo->fork1))
+		if (check_order(philo, data)
+			&& check_fork_status(philo->fork1, philo->fork1_status))
 		{
 			ft_print(data, FORK, NULL, philo->id);
-			if (!pthread_mutex_lock(philo->fork2))
+			if (check_fork_status(philo->fork2, philo->fork2_status))
 			{
 				update_last_meal(philo);
 				ft_print(data, FORK, EAT, philo->id);
@@ -32,12 +33,12 @@ void	eating(t_philo *philo, t_data *data)
 					&& check_finish(data))
 					usleep(500);
 				update_meals(philo);
-				pthread_mutex_unlock(philo->fork1);
-				pthread_mutex_unlock(philo->fork2);
+				release_forks(philo->fork1, philo->fork1_status);
+				release_forks(philo->fork2, philo->fork2_status);
 				break ;
 			}
 			else
-				pthread_mutex_unlock(philo->fork1);
+				release_forks(philo->fork1, philo->fork1_status);
 		}
 		usleep(500);
 	}
