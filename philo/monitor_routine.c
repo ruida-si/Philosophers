@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:01:40 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/21 13:17:54 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/21 18:06:17 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ static long	read_last_meal(t_philo *philo);
 void	*monitor_routine(void *arg)
 {
 	t_data	*data;
-	int		i;
 
-	i = 0;
 	data = (t_data *)arg;
 	usleep(0.95 * data->time_die * 1000);
 	while (1)
