@@ -6,13 +6,13 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:06:10 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/21 15:32:55 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:17:21 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int			read_meals(t_philo *philo);
+static int	check_fork_status(pthread_mutex_t *fork, int *fork_status);
 static void	update_meals(t_philo *philo);
 static void	update_last_meal(t_philo *philo);
 static int	check_order(t_philo *philo, t_data *data);
@@ -44,15 +44,19 @@ void	eating(t_philo *philo, t_data *data)
 	}
 }
 
-int	read_meals(t_philo *philo)
+static int	check_fork_status(pthread_mutex_t *fork, int *fork_status)
 {
-	int	meals;
+	int	i;
 
-	meals = 0;
-	pthread_mutex_lock(&philo->write_meals);
-	meals = philo->meals;
-	pthread_mutex_unlock(&philo->write_meals);
-	return (meals);
+	i = 0;
+	pthread_mutex_lock(fork);
+	if (*fork_status == FREE)
+	{
+		i = 1;
+		*fork_status = TAKEN;
+	}
+	pthread_mutex_unlock(fork);
+	return (i);
 }
 
 static void	update_meals(t_philo *philo)

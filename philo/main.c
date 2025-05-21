@@ -6,14 +6,14 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:32:11 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/20 17:33:44 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:09:04 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	ft_destroy_forks(t_data *data);
 static int	create_threads(t_data *data);
+static void	ft_destroy_forks(t_data *data);
 
 int	main(int ac, char **av)
 {

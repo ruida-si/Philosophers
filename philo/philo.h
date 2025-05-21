@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:42:24 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/21 15:57:53 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:17:51 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	eating(t_philo *philo, t_data *data);
 void	ft_print(t_data *data, char *str1, char *str2, int n);
 int		check_finish(t_data *data);
 int		read_meals(t_philo *philo);
-int		check_fork_status(pthread_mutex_t *fork, int *fork_status);
 void	release_forks(pthread_mutex_t *fork, int *fork_status);
 
 #endif
