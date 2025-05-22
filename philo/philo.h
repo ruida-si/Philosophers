@@ -6,7 +6,7 @@
 /*   By: ruida-si <ruida-si@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:42:24 by ruida-si          #+#    #+#             */
-/*   Updated: 2025/05/21 16:17:51 by ruida-si         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:12:31 by ruida-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ typedef struct s_data
 
 // UTILS INNIT
 long	ft_atol(char *s, t_data *data, int j);
-int		print_error(char *s);
 long	ft_get_time(void);
 void	print_usage(void);
 int		innit_data(char **av, t_data *data);
